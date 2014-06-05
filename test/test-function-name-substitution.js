@@ -3,6 +3,7 @@
 var path = require('path');
 var helpers = require('yeoman-generator').test;
 var _ = require('underscore.string');
+var specHelpers = require('./helpers/spec-helpers.js');
 
 describe('jas generator', function () {
     var jas,
@@ -27,11 +28,9 @@ describe('jas generator', function () {
 
     it('creates expected files', function (done) {
         jas.run({}, function () {
-            helpers.assertFile([
-                // add files you expect to exist here.
-                'lib/' + _.underscored(functionName) + '.js',
-                'spec/' + _.underscored(functionName) + '_spec.js'
-            ]);
+            specHelpers.shouldFileContainCode('lib/' + _.underscored(functionName) + '.js', functionName, true);
+
+            specHelpers.shouldFileContainCode('spec/' + _.underscored(functionName) + '_spec.js', functionName, true);
 
             done();
         });
