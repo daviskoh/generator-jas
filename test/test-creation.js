@@ -2,35 +2,42 @@
 'use strict';
 var path = require('path');
 var helpers = require('yeoman-generator').test;
+var _ = require('underscore.string');
 
 describe('jas generator', function () {
-  beforeEach(function (done) {
-    helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
-      if (err) {
-        return done(err);
-      }
+    var jas,
+        functionName = 'meowFriend';
 
-      this.app = helpers.createGenerator('jas:app', [
-        '../../app'
-      ]);
-      done();
-    }.bind(this));
-  });
+    beforeEach(function (done) {
+        helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
+            if (err) {
+                return done(err);
+            }
 
-  it('creates expected files', function (done) {
-    var expected = [
-      // add files you expect to exist here.
-      '.jshintrc',
-      '.editorconfig'
-    ];
+            jas = helpers.createGenerator('jas:app', [
+                '../../app'
+            ], [functionName]);
 
-    helpers.mockPrompt(this.app, {
-      'someOption': true
+            jas.options['skip-install'] = true;
+
+            done();
+
+        }.bind(this));
     });
-    this.app.options['skip-install'] = true;
-    this.app.run({}, function () {
-      helpers.assertFile(expected);
-      done();
+
+    it('creates expected files', function (done) {
+        helpers.mockPrompt(jas, {
+
+        });
+
+        jas.run({}, function () {
+            helpers.assertFile([
+                // add files you expect to exist here.
+                'lib/' + _.underscored(functionName) + '.js',
+                'spec/' + _.underscored(functionName) + '_spec.js'
+            ]);
+
+            done();
+        });
     });
-  });
 });

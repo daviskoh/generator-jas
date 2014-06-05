@@ -4,50 +4,26 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
+var _ = require('underscore.string');
 
-
-var JasGenerator = yeoman.generators.Base.extend({
+var JasGenerator = yeoman.generators.NamedBase.extend({
     init: function () {
         this.pkg = require('../package.json');
-
-        this.on('end', function () {
-            if (!this.options['skip-install']) {
-                this.installDependencies();
-            }
-        });
-    },
-
-    askFor: function () {
-        var done = this.async();
-
-        // Have Yeoman greet the user.
-        this.log(yosay('Welcome to the marvelous Jas generator!'));
-
-        var prompts = [{
-            type: 'confirm',
-            name: 'someOption',
-            message: 'Would you like to enable this option?',
-            default: true
-        }];
-
-        this.prompt(prompts, function (props) {
-            this.someOption = props.someOption;
-
-            done();
-        }.bind(this));
     },
 
     app: function () {
-        this.mkdir('app');
-        this.mkdir('app/templates');
+        this.camelizedName = _.camelize(this.name);
+        this.underscoredName = _.underscored(this.name);
 
-        this.copy('_package.json', 'package.json');
-        this.copy('_bower.json', 'bower.json');
-    },
+        console.log('Setting up files for ' + chalk.green(this.name) + ' function');
 
-    projectfiles: function () {
-        this.copy('editorconfig', '.editorconfig');
-        this.copy('jshintrc', '.jshintrc');
+        // create directories
+        this.mkdir('lib');
+        this.mkdir('spec');
+
+        // create files
+        this.template('function.js', 'lib/' + this.underscoredName + '.js');
+        this.template('function.js', 'spec/' + this.underscoredName + '_spec.js');
     }
 });
 
