@@ -9,6 +9,12 @@ var _ = require('underscore.string');
 var JasGenerator = yeoman.generators.NamedBase.extend({
     init: function () {
         this.pkg = require('../package.json');
+
+        this.on('end', function () {
+            // if (!this.options['skip-install']) {
+            //     this.installDependencies();
+            // }
+        });
     },
 
     app: function () {
@@ -23,7 +29,9 @@ var JasGenerator = yeoman.generators.NamedBase.extend({
 
         // create files
         this.template('function.js', 'lib/' + this.underscoredName + '.js');
-        this.template('function.js', 'spec/' + this.underscoredName + '_spec.js');
+        this.template('function_spec.js', 'spec/' + this.underscoredName + '_spec.js');
+
+        this.template('gitignore', '.gitignore');
     }
 });
 
