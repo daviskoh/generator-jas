@@ -6,7 +6,7 @@ var yosay = require('yosay');
 var chalk = require('chalk');
 var _ = require('underscore.string');
 
-var JasGenerator = yeoman.generators.NamedBase.extend({
+var JasGenerator = yeoman.generators.Base.extend({
     init: function () {
         this.pkg = require('../package.json');
 
@@ -18,6 +18,7 @@ var JasGenerator = yeoman.generators.NamedBase.extend({
     },
 
     app: function () {
+        this.name = path.basename(process.cwd());
         this.camelizedName = _.camelize(this.name);
         this.underscoredName = _.underscored(this.name);
 

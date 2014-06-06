@@ -7,17 +7,16 @@ var specHelpers = require('./helpers/spec-helpers.js');
 
 describe('jas generator', function () {
     var jas,
-        functionName = 'meowFriend';
+        functionName = 'meowFriend',
+        underscoredFunctionName = _.underscored(functionName);
 
     beforeEach(function (done) {
-        helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
+        helpers.testDirectory(path.join(__dirname, underscoredFunctionName), function (err) {
             if (err) {
                 return done(err);
             }
 
-            jas = helpers.createGenerator('jas:app', [
-                '../../app'
-            ], [functionName]);
+            jas = helpers.createGenerator('jas:app', ['../../app']);
 
             jas.options['skip-install'] = true;
 
@@ -26,7 +25,7 @@ describe('jas generator', function () {
         }.bind(this));
     });
 
-    it('creates expected files', function (done) {
+    it('generates proper instance of the function name', function (done) {
         jas.run({}, function () {
             specHelpers.shouldFileContainCode('lib/' + _.underscored(functionName) + '.js', functionName, true);
 

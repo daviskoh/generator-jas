@@ -3,26 +3,32 @@
 var path = require('path');
 var helpers = require('yeoman-generator').test;
 var _ = require('underscore.string');
+var rimraf = require('rimraf');
 
 describe('jas generator', function () {
     var jas,
-        functionName = 'meowFriend';
+        functionName = 'meowFriend',
+        underscoredFunctionName = _.underscored(functionName);
 
     beforeEach(function (done) {
-        helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
+        helpers.testDirectory(path.join(__dirname, underscoredFunctionName), function (err) {
             if (err) {
                 return done(err);
             }
 
-            jas = helpers.createGenerator('jas:app', [
-                '../../app'
-            ], [functionName]);
+            jas = helpers.createGenerator('jas:app', ['../../app']);
 
             jas.options['skip-install'] = true;
 
             done();
 
         }.bind(this));
+    });
+
+    after(function (done) {
+        rimraf(path.join(__dirname, underscoredFunctionName), function (error) {
+          done();
+        });
     });
 
     it('creates expected files', function (done) {
