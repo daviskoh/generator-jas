@@ -29,7 +29,7 @@ describe('jas generator', function () {
         jas.run({}, function () {
             specHelpers.shouldFileContainCode('lib/' + _.underscored(functionName) + '.js', functionName, true);
 
-            specHelpers.shouldFileContainCode('spec/' + _.underscored(functionName) + '_spec.js', functionName, true);
+            specHelpers.shouldFileContainCode('spec/' + _.underscored(functionName) + '.spec.js', functionName, true);
 
             done();
         });

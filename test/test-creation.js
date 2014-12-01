@@ -36,7 +36,7 @@ describe('jas generator', function () {
             helpers.assertFile([
                 // add files you expect to exist here.
                 'lib/' + _.underscored(functionName) + '.js',
-                'spec/' + _.underscored(functionName) + '_spec.js',
+                'spec/' + _.underscored(functionName) + '.spec.js',
                 '.gitignore'
             ]);
 

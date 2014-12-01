@@ -30,7 +30,7 @@ var JasGenerator = yeoman.generators.Base.extend({
 
         // create files
         this.template('function.js', 'lib/' + this.underscoredName + '.js');
-        this.template('function_spec.js', 'spec/' + this.underscoredName + '_spec.js');
+        this.template('function.spec.js', 'spec/' + this.underscoredName + '.spec.js');
 
         this.template('gitignore', '.gitignore');
     }
