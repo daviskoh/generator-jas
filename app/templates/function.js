@@ -1,4 +1,4 @@
-function <%= camelizedName %> (argument) {
+function <%= camelizedName %>(argument) {
     
 }
 

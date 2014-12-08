@@ -1,4 +1,4 @@
-function meowFriend (argument) {
+function meowFriend(argument) {
     
 }
 
