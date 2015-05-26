@@ -1,4 +1,4 @@
-var meowFriend = require('../lib/meow_friend.js');
+var meowFriend = require('./meow_friend.js');
 
 describe('meowFriend', function() {
     it('is a function', function () {

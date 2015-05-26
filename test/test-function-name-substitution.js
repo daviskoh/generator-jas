@@ -27,10 +27,19 @@ describe('jas generator', function () {
 
     it('generates proper instance of the function name', function (done) {
         jas.run({}, function () {
-            specHelpers.shouldFileContainCode(_.underscored(functionName) + '.js', functionName, true);
+            specHelpers.shouldFileContainCode(underscoredFunctionName + '.js', functionName, true);
 
-            specHelpers.shouldFileContainCode(_.underscored(functionName) + '.spec.js', functionName, true);
+            specHelpers.shouldFileContainCode(underscoredFunctionName + '.spec.js', functionName, true);
 
+            done();
+        });
+    });
+
+    it('require in exported function into spec file', function (done) {
+        var code = "var " + _.camelize(functionName) + " = require('./" + underscoredFunctionName + ".js');"
+
+        jas.run({}, function () {
+            specHelpers.shouldFileContainCode(underscoredFunctionName + '.spec.js', code, true);
             done();
         });
     });

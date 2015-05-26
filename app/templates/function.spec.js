@@ -1,4 +1,4 @@
-var <%= camelizedName %> = require('../lib/<%= underscoredName %>.js');
+var <%= camelizedName %> = require('./<%= underscoredName %>.js');
 
 describe('<%= camelizedName %>', function() {
     it('is a function', function () {
