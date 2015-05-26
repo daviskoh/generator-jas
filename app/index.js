@@ -24,13 +24,9 @@ var JasGenerator = yeoman.generators.Base.extend({
 
         console.log('Setting up files for ' + chalk.green(this.name) + ' function');
 
-        // create directories
-        this.mkdir('lib');
-        this.mkdir('spec');
-
         // create files
-        this.template('function.js', 'lib/' + this.underscoredName + '.js');
-        this.template('function.spec.js', 'spec/' + this.underscoredName + '.spec.js');
+        this.template('function.js', this.underscoredName + '.js');
+        this.template('function.spec.js', this.underscoredName + '.spec.js');
 
         this.template('gitignore', '.gitignore');
     }

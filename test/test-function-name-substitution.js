@@ -27,9 +27,9 @@ describe('jas generator', function () {
 
     it('generates proper instance of the function name', function (done) {
         jas.run({}, function () {
-            specHelpers.shouldFileContainCode('lib/' + _.underscored(functionName) + '.js', functionName, true);
+            specHelpers.shouldFileContainCode(_.underscored(functionName) + '.js', functionName, true);
 
-            specHelpers.shouldFileContainCode('spec/' + _.underscored(functionName) + '.spec.js', functionName, true);
+            specHelpers.shouldFileContainCode(_.underscored(functionName) + '.spec.js', functionName, true);
 
             done();
         });
