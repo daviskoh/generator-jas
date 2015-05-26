@@ -8,11 +8,13 @@ module.exports = {
         trueFalse = trueFalse === undefined ? true : trueFalse;
 
         // read file
-        var file = fs.readFileSync(filePath, 'utf8');
+        var file = fs.readFileSync(filePath, 'utf8'),
+            indexOfCode = file.indexOf(code);
 
-        // turn code in string-form to regex
-        var regex = new RegExp(code);
+        if (trueFalse) {
+            return indexOfCode.should.not.eql(-1, '\n\n' + file + ' should contain ' + code);
+        }
 
-        regex.test(file).should.eql(trueFalse, file + ' contains ' + code + ' should be ' + trueFalse);
+        return indexOfCode.should.eql(-1, '\n\n' + file + ' should NOT contain ' + code);
     }
 }
